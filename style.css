@@ -1,0 +1,8 @@
+/* Set background image */
+/* Set background image */
+body {
+    background-image: url('../images/picture-of-food.jpg'); /* Adjust the path as necessary */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+}
