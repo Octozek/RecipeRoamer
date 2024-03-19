@@ -34,7 +34,8 @@ var saveChangesBtn = document.querySelector(".modal-card-foot .is-success");
 saveChangesBtn.onclick = function() {
     modal.classList.remove("is-active"); // Close the current modal
     secondModal.classList.add("is-active"); // Open the second modal
-}
+    requestAPI()
+  }
 
 // When the user clicks on the close button of the second modal, close the second modal
 document.querySelector("#secondModal .delete").onclick = function() {
@@ -43,14 +44,8 @@ document.querySelector("#secondModal .delete").onclick = function() {
 
 // ---------- API Request Below -----------
 
-const obj = {
-  hits: [
-    {},
-    {}
-  ]
-}
 
-obj.hits[1]
+
 
 function requestAPI() {
   var APIKey = "&app_key=46ed35f132f42ee1119d14f95de261df";
@@ -86,6 +81,7 @@ function requestAPI() {
         // Create card
         var recipeCard = document.createElement("div")
         recipeCard.classList.add("box")
+
         //use bulma title styling to add title to each card
         var recipeTitle = document.createElement("h2");
         recipeTitle.textContent = recipe.label;
@@ -95,7 +91,8 @@ function requestAPI() {
         var recipeImage = document.createElement("img")
         recipeImage.src = recipe.image
 
-        // Add image to the card
+        // Add image and title
+        recipeCard.appendChild(recipeTitle);
         recipeCard.appendChild(recipeImage)
 
         // Add the card to the cards div
