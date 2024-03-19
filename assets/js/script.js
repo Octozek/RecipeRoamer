@@ -24,22 +24,21 @@ window.onclick = function (event) {
   }
 }
 
+// Get the second modal
+var secondModal = document.getElementById("secondModal");
 
-  // Get the second modal
-  var secondModal = document.getElementById("secondModal");
+// Get the button that opens the second modal
+var saveChangesBtn = document.querySelector(".modal-card-foot .is-success");
 
-  // Get the button that opens the second modal
-  var saveChangesBtn = document.querySelector(".modal-card-foot .is-success");
-  
-  // When the user clicks the "Save changes" button, open the second modal and close the current modal
-  saveChangesBtn.onclick = function() {
-      modal.classList.remove("is-active"); // Close the current modal
-      secondModal.classList.add("is-active"); // Open the second modal
-  }
-  
-  // When the user clicks on the close button of the second modal, close the second modal
-  document.querySelector("#secondModal .delete").onclick = function() {
-    secondModal.classList.remove("is-active");
+// When the user clicks the "Save changes" button, open the second modal and close the current modal
+saveChangesBtn.onclick = function() {
+    modal.classList.remove("is-active"); // Close the current modal
+    secondModal.classList.add("is-active"); // Open the second modal
+}
+
+// When the user clicks on the close button of the second modal, close the second modal
+document.querySelector("#secondModal .delete").onclick = function() {
+  secondModal.classList.remove("is-active");
 }
 
 // ---------- API Request Below -----------
@@ -53,9 +52,9 @@ function requestAPI() {
   var cuisineTypeInput = "Asian";
   var mealTypeInput = "Dinner";
 
-  var keyword = ("&q=" + keywordInput);
-  var cuisineType = ("&cuisineType=" + cuisineTypeInput);
-  var mealType = ("&mealType=" + mealTypeInput);
+  var keyword = "&q=" + keywordInput;
+  var cuisineType = "&cuisineType=" + cuisineTypeInput;
+  var mealType = "&mealType=" + mealTypeInput;
 
   fetch(APIBaseURL + keyword + APIId + APIKey + cuisineType + mealType)
     .then(function (response) {
@@ -63,10 +62,31 @@ function requestAPI() {
     })
     .then(function (data) {
       console.log(data);
-      //create for loop for dummy cards
-      for(var i = 0; i<data.hits.length; i++){
-        //create boxes
-      }
+      // Create container to hold recipe cards
+      var recipeCards = document.createElement("div")
+      recipeCards.classList.add("recipeCards")
+
+      // Add the cards to the div
+      var cardDisplay = document.querySelector(".section .container")
+      cardDisplay.appendChild(recipeCards)
+
+      // Use API and go through each "hit"
+      data.hits.forEach(function(hit){
+        var recipe = hit.recipe;
+
+        // Create card
+        var recipeCard = document.createElement("div")
+        recipeCard.classList.add("box")
+
+        // Add image
+        var recipeImage = document.createElement("img")
+        recipeImage.src = recipe.image
+
+        // Add image to the card
+        recipeCard.appendChild(recipeImage)
+
+        // Add the card to the cards div
+        recipeCards.appendChild(recipeCard)
+      })
     });
 } 
-
