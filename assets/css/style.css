@@ -33,10 +33,16 @@ body {
 }
 
 .navbar-item {
-    
-    font-size: 1.2rem; /* Adjust the font size as needed */
+    font-size: 1.2rem;
+    border-radius: 20px;
+    background-color: #209CEE;
+    padding: 10px 15px;
+    margin: 0 10px;
 }
 
+.navbar-item:hover {
+    background-color: #1971C2;
+}
 
 .search-button-container {
     font-size: 2px;
@@ -96,3 +102,27 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
+
+  /*in second modal Container for image and text */
+.image-with-text {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */
+}
+
+/*in second modal Image styles */
+.round-image {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image fills the container without stretching */
+    margin-right: 10px; /* Add margin to create space between image and text */
+}
+
+/* in second modal Text styles */
+.text {
+    font-size: 18px; /* Adjust the font size as needed */
+    text-align: center; /* Center the text horizontally */
+    flex-grow: 1; /* Allow the text to grow and fill remaining space */
+    display: flex; /* Use flexbox layout for text container */
+    align-items: center; /* Center text vertically */
+}

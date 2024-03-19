@@ -25,7 +25,22 @@ window.onclick = function (event) {
 }
 
 
+  // Get the second modal
+  var secondModal = document.getElementById("secondModal");
 
+  // Get the button that opens the second modal
+  var saveChangesBtn = document.querySelector(".modal-card-foot .is-success");
+  
+  // When the user clicks the "Save changes" button, open the second modal and close the current modal
+  saveChangesBtn.onclick = function() {
+      modal.classList.remove("is-active"); // Close the current modal
+      secondModal.classList.add("is-active"); // Open the second modal
+  }
+  
+  // When the user clicks on the close button of the second modal, close the second modal
+  document.querySelector("#secondModal .delete").onclick = function() {
+    secondModal.classList.remove("is-active");
+}
 
 // ---------- API Request Below -----------
 
@@ -48,5 +63,7 @@ function requestAPI() {
     })
     .then(function (data) {
       console.log(data);
+      
     });
 } 
+
