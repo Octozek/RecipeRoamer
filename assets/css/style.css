@@ -11,6 +11,17 @@ body {
     min-height: calc(100vh - 0.1rem); /* Subtract the footer height */
     position: relative;
 }
+.navbar-item {
+    font-size: 1.2rem;
+    border-radius: 20px;
+    background-color: #209CEE;
+    padding: 10px 15px;
+    margin: 0 10px;
+}
+
+.navbar-item:hover {
+    background-color: #1971C2;
+}
 
 .navbar {
     padding-top: 6rem; /* Adjust the padding to move the navbar down */
