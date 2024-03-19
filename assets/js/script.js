@@ -43,6 +43,15 @@ document.querySelector("#secondModal .delete").onclick = function() {
 
 // ---------- API Request Below -----------
 
+const obj = {
+  hits: [
+    {},
+    {}
+  ]
+}
+
+obj.hits[1]
+
 function requestAPI() {
   var APIKey = "&app_key=46ed35f132f42ee1119d14f95de261df";
   var APIId = "&app_id=3577f865";
@@ -77,6 +86,10 @@ function requestAPI() {
         // Create card
         var recipeCard = document.createElement("div")
         recipeCard.classList.add("box")
+        //use bulma title styling to add title to each card
+        var recipeTitle = document.createElement("h2");
+        recipeTitle.textContent = recipe.label;
+        recipeTitle.classList.add("title", "is-4");
 
         // Add image
         var recipeImage = document.createElement("img")
@@ -89,4 +102,5 @@ function requestAPI() {
         recipeCards.appendChild(recipeCard)
       })
     });
+
 } 
