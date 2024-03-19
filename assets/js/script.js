@@ -63,7 +63,10 @@ function requestAPI() {
     })
     .then(function (data) {
       console.log(data);
-      
+      //create for loop for dummy cards
+      for(var i = 0; i<data.hits.length; i++){
+        //create boxes
+      }
     });
 } 
 
