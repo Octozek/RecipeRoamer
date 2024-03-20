@@ -65,7 +65,19 @@ function requestAPI() {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      if (data.hits.length > 0) {
+        var randomIndex = Math.floor(Math.random() * data.hits.length);
+        var randomRecipeLabel = data.hits[randomIndex].recipe.label;
+        document.getElementById("searchInput").value = randomRecipeLabel;
+      } else {
+        document.getElementById("searchInput").value = "No recipes found";
+      }
+    })
+    .catch(function (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+};
+      
       // Create container to hold recipe cards
       var recipeCards = document.createElement("div")
       recipeCards.classList.add("recipeCards")
@@ -97,7 +109,4 @@ function requestAPI() {
 
         // Add the card to the cards div
         recipeCards.appendChild(recipeCard)
-      })
-    });
-
-} 
+      });
