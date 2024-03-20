@@ -1,0 +1,142 @@
+body {
+    background-image: url('../images/various-vegetables-black-table-with-space-message.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+}
+
+.leaf {
+    min-height: calc(100vh - 0.1rem); /* Subtract the footer height */
+    position: relative;
+}
+
+.navbar {
+    padding-top: 6rem; /* Adjust the padding to move the navbar down */
+    background-color: rgba(0, 0, 0, 0) !important; /* Transparent background for navbar */
+}
+
+.navbar-item {
+    font-size: 1.2rem;
+    border-radius: 20px;
+    background-color: #209CEE;
+    padding: 10px 15px;
+    margin: 0 10px;
+}
+
+.navbar-item:hover {
+    background-color: #1971C2;
+}
+
+.navbar-start {
+    margin-left: 50px; /* Move navbar items to the right */
+}
+
+.title {
+    font-size: 3.5rem !important; /* Adjust the font size as needed */
+    margin-top: -2rem; /* Adjust the margin to move the title up */
+    margin-left: 50px;
+    color: white; /* Set text color to white */
+}
+
+.card-title {
+    font-size: 3.5rem !important; /* Adjust the font size as needed */
+    margin-top: -2rem; /* Adjust the margin to move the title up */
+    margin-left: 50px;
+    color: black; /* Set text color to white */
+}
+
+.search-button-container {
+    font-size: 2px;
+    position: absolute;
+    top: 60%;
+    left: 280px; /* Adjust this value to move the button further to the left */
+    transform: translateY(-50%);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0; /* Ensure the footer aligns with the left edge of the screen */
+    width: 100%;
+    height: 0.1rem; /* Set a very small height for the footer */
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background for footer */
+    color: white; /* Set text color */
+    text-align: center; /* Center align text */
+    line-height: 0.1rem; /* Set line height equal to footer height */
+}
+
+.footer p {
+    margin: 0; /* Remove default margins */
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal.is-active + .navbar.is-primary::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 999; /* Ensure overlay appears above the navbar */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* in second modal Container for image and text */
+.image-with-text {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */
+}
+
+/* in second modal Image styles */
+.round-image {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image fills the container without stretching */
+    margin-right: 10px; /* Add margin to create space between image and text */
+}
+
+/* in second modal Text styles */
+.text {
+    font-size: 18px; /* Adjust the font size as needed */
+    text-align: center; /* Center the text horizontally */
+    flex-grow: 1; /* Allow the text to grow and fill remaining space */
+    display: flex; /* Use flexbox layout for text container */
+    align-items: center; /* Center text vertically */
+}
