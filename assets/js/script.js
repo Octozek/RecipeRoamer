@@ -57,10 +57,11 @@ function requestAPI() {
   var mealTypeInput = "Dinner";
 
   var keyword = "&q=" + keywordInput;
+  var dishType = "&dishType=" + dishTypeInput;
   var cuisineType = "&cuisineType=" + cuisineTypeInput;
   var mealType = "&mealType=" + mealTypeInput;
 
-  fetch(APIBaseURL + keyword + APIId + APIKey + cuisineType + mealType)
+  fetch(APIBaseURL + keyword + APIId + APIKey + cuisineType + mealType + dishType)
     .then(function (response) {
       return response.json();
     })
