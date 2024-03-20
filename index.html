@@ -3,11 +3,21 @@
 <html lang ="en-us">
 
 <head>
+<<<<<<< HEAD
     <title>project-1-page-3.hmtl</title>
     <link rel="stylesheet" href="pj1.css" />
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeRoamer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+>>>>>>> development
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="block-1">
         <h2><img id="img" src="https://tbcfitcar.com/images/SmallMeal.jpg"><span id="text-1">Title of Food</span></h2>
         <button id="favorite" type="submit"> Favorite <img src="https://www.clipartbest.com/cliparts/yTk/pGL/yTkpGLg8c.png"></button>
@@ -24,6 +34,185 @@
     </div>
 
     
+=======
+    <div class="leaf">
+        <!-- Navbar -->
+        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item-title" href="#">
+                    <h1 class="title is-4">RecipeRoamer</h1>
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-start"> <!-- Changed from navbar-end to navbar-start -->
+                    <a class="navbar-item" href="#">Home</a>
+                    <a class="navbar-item" href="#">Fav Foods</a>
+                    <a class="navbar-item" href="#">Account Info</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Button for searching recipes (centered) -->
+        <div class="search-button-container">
+            <button id="myBtn" class="button is-info search-button">Search for Recipes</button>
+        </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <input class="input is-rounded" type="text" id="search-input" placeholder="🌽Search for recipes🍳"></p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+      
+       
+
+        <div class="field">
+          <label class="label">Meal Types:</label>
+          <div class="control">
+            <div class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>Breakfast</option>
+                <option>Brunch</option>
+                <option>Lunch/Dinner</option>
+                <option>Snack</option>
+                <option>Teatime</option>
+              </select>
+            </div>
+          </div>
+        </div>
+  
+      
+        <div class="field">
+          <label class="label">Dish Types:</label>
+          <div class="control">
+            <div class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>Alcohol Cocktail</option>
+                <option>Biscuits and Cookies</option>
+                <option>Bread</option>
+                <option>Cereals</option>
+                <option>Condiments and Sauces</option>
+                <option>Desserts</option>
+                <option>Drinks</option>
+                <option>Egg</option>
+                <option>Ice Cream and Custard</option>
+                <option>Main Course</option>
+                <option>Pancake</option>
+                <option>Pasta</option>
+                <option>Pastry</option>
+                <option>Pies and Tarts</option>
+                <option>Pizza</option>
+                <option>Preps</option>
+                <option>Preserve</option>
+                <option>Salad</option>
+                <option>Sandwiches</option>
+                <option>Seafood</option>
+                <option>Side Dish</option>
+                <option>Soup</option>
+                <option>Special Occasions</option>
+                <option>Starter</option>
+                <option>Sweets</option>
+
+
+              </select>
+            </div>
+          </div>
+        </div>
+  
+       
+        <div class="field">
+          <label class="label">Cuisine Types:</label>
+          <div class="control">
+            <div class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>American</option>
+                <option>Asian</option>
+                <option>British</option>
+                <option>Caribbean</option>
+                <option>Central Europe</option>
+                <option>Chinese</option>
+                <option>Eastern Europe</option>
+                <option>French</option>
+                <option>Greek</option>
+                <option>Indian</option>
+                <option>Italian</option>
+                <option>Japanese</option>
+                <option>Korean</option>
+                <option>Kosher</option>
+                <option>Mediterranean</option>
+                <option>Mexican</option>
+                <option>Middle Eastern</option>
+                <option>Nordic</option>
+                <option>South American</option>
+                <option>South East Asian</option>
+                <option>World</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" onclick="requestAPI()">Save changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
+
+<!-- Second Modal -->
+<div id="secondModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title"></p>
+            <button class="delete" aria-label="close"></button> <!-- Close button -->
+        </header>
+        <div class="modal-content">
+            <div class="box">
+                <!-- Image and text -->
+        <div class="image-with-text">
+               <!-- api image will go here this is place holder  -->
+          <img src="./assets/images/spaghetti-1932466_1280.jpg" alt="Spaghetti" class="round-image">
+          <!-- api text will go here this is place holder  -->
+          <span class="text">Test</span>
+        </div>
+           
+            <p>Other content...</p>
+        </div>
+    </div>
+</div>
+
+        <!-- Content section -->
+        <section class="section">
+            <div class="container">
+                <!-- Your content goes here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    &copy; 2024 RecipeRoamer. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+>>>>>>> development
 </body>
 
 </html>
