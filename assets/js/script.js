@@ -52,21 +52,33 @@ function requestAPI() {
   var APIId = "&app_id=3577f865";
   var APIBaseURL = "https://api.edamam.com/api/recipes/v2?type=public";
 
-  var keywordInput = "chicken";
+  var keywordInput = document.getElementById("searchInput").value.trim();
   var cuisineTypeInput = "Asian";
   var mealTypeInput = "Dinner";
 
   var keyword = "&q=" + keywordInput;
-  var dishType = "&dishType=" + dishTypeInput;
   var cuisineType = "&cuisineType=" + cuisineTypeInput;
   var mealType = "&mealType=" + mealTypeInput;
 
-  fetch(APIBaseURL + keyword + APIId + APIKey + cuisineType + mealType + dishType)
+  fetch(APIBaseURL + keyword + APIId + APIKey + cuisineType + mealType)
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-      console.log(data);
+      .then(function (data) {
+        // Display random recipes in the text input
+        if (data.hits.length > 0) {
+          var randomIndex = Math.floor(Math.random() * data.hits.length);
+          var randomRecipeLabel = data.hits[randomIndex].recipe.label;
+          document.getElementById("searchInput").value = randomRecipeLabel;
+        } else {
+          document.getElementById("searchInput").value = "No recipes found";
+        }
+      })
+      .catch(function (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
+
       // Create container to hold recipe cards
       var recipeCards = document.createElement("div")
       recipeCards.classList.add("recipeCards")
@@ -99,6 +111,6 @@ function requestAPI() {
         // Add the card to the cards div
         recipeCards.appendChild(recipeCard)
       })
-    });
+    ;
 
-} 
+; 

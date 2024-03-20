@@ -43,7 +43,7 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Enter Recipe Information</p>
+        <input class="input is-rounded" type="text" id="search-input" placeholder="🌽Search for recipes🍳"></p>
         <button class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
@@ -89,7 +89,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success">Save changes</button>
+        <button class="button is-success" onclick="requestAPI()">Save changes</button>
         <button class="button">Cancel</button>
       </footer>
     </div>
@@ -100,7 +100,6 @@
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">Enter Recipe Information</p>
             <button class="delete" aria-label="close"></button> <!-- Close button -->
         </header>
         <div class="modal-content">
