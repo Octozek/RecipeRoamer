@@ -147,30 +147,6 @@ saveChangesBtn.onclick = function () {
       });
   };
   requestAPI();
-  function savFav() {
-    //list of fav recipes from local storage
-    var favorites = localStorage.getItem("favoriteRecipes");
-    //create empty array 
-    var favoriteRecipes;
-    //run through current saved recipes
-    if(favorites){
-      favoriteRecipes = JSON.parse(favorites)
-    } else {
-      //if its empty create empty 
-      favoriteRecipes = []
-    }
-    var favIndex = favoriteRecipes.findIndex(function(favRecipe){
-      return favRecipe.label === recipe.label
-    })
-    //if it isnt in the array add it
-    if(favIndex === -1){
-      favoriteRecipes.push(recipe)
-    } else{
-      favoriteRecipes.splice(favIndex, 1)
-    }
-    //save the fav recipes to local storage
-    localStorage.setItem("favoriteRecipes", JSON.stringify(favoriterecipes))
-  }
 }
 
 // When the user clicks on the close button of the second modal, close the second modal
