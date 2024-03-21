@@ -40,6 +40,13 @@ body {
     color: white; /* Set text color to white */
 }
 
+.card-title {
+    font-size: 3.5rem !important; /* Adjust the font size as needed */
+    margin-top: -2rem; /* Adjust the margin to move the title up */
+    margin-left: 50px;
+    color: black; /* Set text color to white */
+}
+
 .search-button-container {
     font-size: 2px;
     position: absolute;
