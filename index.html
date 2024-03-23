@@ -16,7 +16,7 @@
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item-title" href="#">
-          <h1 class="title is-4">RecipeRoamer</h1>
+          <h1 id="mainTitle" class="title is-4">RecipeRoamer</h1>
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
@@ -29,7 +29,7 @@
       <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-start"> <!-- Changed from navbar-end to navbar-start -->
           <a class="navbar-item" href="#">Home</a>
-          <a class="navbar-item" href="#">Fav Foods</a>
+          <a id="openFavs" class="navbar-item" href="#">Fav Foods</a>
           <a class="navbar-item" href="#">Account Info</a>
         </div>
       </div>
@@ -45,7 +45,8 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <input class="input is-rounded" type="text" id="search-input" placeholder="Enter keyword... Ex: 'Chicken'"></p>
+          <input class="input is-rounded" type="text" id="search-input" placeholder="Enter keyword... Ex: 'Chicken'">
+          </p>
           <button class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
@@ -158,14 +159,14 @@
         <div class="modal-content">
           <div class="box">
             <!-- Image and text -->
-            <div class="image-with-text">
-              <!-- api image will go here this is place holder  -->
-              <img src="./assets/images/spaghetti-1932466_1280.jpg" alt="Spaghetti" class="round-image">
-              <!-- api text will go here this is place holder  -->
-              <span class="text">Test</span>
-            </div>
+            <!-- <div class="image-with-text"> -->
+            <!-- api image will go here this is place holder  -->
+            <!-- <img src="./assets/images/spaghetti-1932466_1280.jpg" alt="Spaghetti" class="round-image"> -->
+            <!-- api text will go here this is place holder  -->
+            <!-- <span class="text">Test</span> -->
+            <!-- </div> -->
 
-            <p>Other content...</p>
+            <!-- <p>Other content...</p> -->
           </div>
         </div>
       </div>
@@ -178,14 +179,34 @@
       </section>
 
       <!-- Footer -->
-      <footer class="footer">
-        <div class="content has-text-centered">
-          <p>
-            &copy; 2024 RecipeRoamer. All rights reserved.
-          </p>
-        </div>
-      </footer>
+
     </div>
+
+    <!-- Favorites Modal -->
+    <div id="FavModal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head has-text-centered">
+          <h2 class="m-2 mr-6">Your Saved Recipes:</h2>
+          <button id="removeFavs" class="button m-2 mr-6 is-danger">Remove Favorites</button>
+          <button id="closeFavs" class="delete" aria-label="close"></button>
+          
+        </header>
+        <section id="renderFavorites" class="modal-card-body">
+
+        </section>
+        
+      </div>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          &copy; 2024 RecipeRoamer. All rights reserved.
+        </p>
+      </div>
+    </footer>
 
     <script src="./assets/js/script.js"></script>
 </body>

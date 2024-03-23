@@ -1,11 +1,58 @@
-// Get the modal
+// Get the modals
 var modal = document.getElementById("myModal");
+var favModal = document.getElementById("FavModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.querySelector(".delete");
+
+// Sets the array for local storage - empty if there isn't any saved recipes
+var savedRecipesStorage = localStorage.getItem("Saved")
+if (!savedRecipesStorage) {
+  var savedRecipesArray = [];
+} else {
+  var savedRecipesArray = savedRecipesStorage.split(",");
+  console.log(savedRecipesArray);
+}
+
+// If user hits "Fav Foods" button, pop up a new modal with their saved recipes
+var openFavsBtn = document.getElementById("openFavs");
+openFavsBtn.addEventListener("click", function () {
+  favModal.classList.add("is-active");
+
+  var closeFavs = document.getElementById("closeFavs");
+  closeFavs.onclick = function () {
+    favModal.classList.remove("is-active");
+  }
+
+  // If there aren't any saved recipes, renders a message. If there are favorites, renders the links on the modal
+  var renderFavoritesHere = document.getElementById("renderFavorites")
+  if (savedRecipesArray == []) {
+    renderFavoritesHere.innerHTML = "";
+    var noFavorites = document.createElement("p");
+    noFavorites.textContent = "No Favorites Found. Go Search for Some!";
+    renderFavoritesHere.appendChild(noFavorites);
+  } else {
+    renderFavoritesHere.innerHTML = "";
+    for (var i = 0; i < savedRecipesArray.length; i++) {
+      var newLinkEl = document.createElement("a");
+      newLinkEl.textContent = savedRecipesArray[i];
+      newLinkEl.classList.add("button", "is-fullwidth", "is-link", "is-outlined", "m-2");
+      newLinkEl.setAttribute("href", savedRecipesArray[i]);
+      renderFavoritesHere.appendChild(newLinkEl);
+
+      // add functionality to remove favorites
+      var removeFavButton = document.getElementById("removeFavs");
+      removeFavButton.addEventListener("click", function() {
+        savedRecipesArray = [];
+        renderFavoritesHere.innerHTML = "";
+        localStorage.setItem("Saved", savedRecipesArray)
+      })
+    }
+  }
+})
 
 // When the user clicks the button, open the modal
 btn.onclick = function () {
@@ -121,9 +168,12 @@ saveChangesBtn.onclick = function () {
 
             // Add button for user to save to favorites
             var saveRecipe = document.createElement("button");
+            var dataURL = recipe.url;
+            var dataTitle = recipe.label;
             saveRecipe.textContent = "Add Recipe to Favorites";
-            saveRecipe.classList.add("button", "is-fullwidth", "is-danger", "is-outlined", "m-2");
-            saveRecipe.classList.add("data-url", recipe.url);
+            saveRecipe.classList.add("button", "is-fullwidth", "is-danger", "is-outlined", "m-2", "favBtn");
+            saveRecipe.setAttribute("data-url", dataURL);
+            saveRecipe.setAttribute("data-title", dataTitle);
 
             // Add image and title
             recipeCard.appendChild(recipeTitle);
@@ -147,30 +197,20 @@ saveChangesBtn.onclick = function () {
       });
   };
   requestAPI();
-  function savFav() {
-    //list of fav recipes from local storage
-    var favorites = localStorage.getItem("favoriteRecipes");
-    //create empty array 
-    var favoriteRecipes;
-    //run through current saved recipes
-    if(favorites){
-      favoriteRecipes = JSON.parse(favorites)
-    } else {
-      //if its empty create empty 
-      favoriteRecipes = []
+
+  // When the Recipe Cards appear, make the title and navbar have opacity and "fade" into the background until hovered over
+  document.querySelector("#mainTitle").classList.add("modalTitle");
+  document.querySelector("#navbarMenu").classList.add("opacity6");
+
+  // Add listener for if user clicks the "save favorite"button
+  secondModal.addEventListener("click", function (event) {
+    var element = event.target;
+    if (element.matches(".favBtn")) {
+      savedRecipesArray.push(element.dataset.url);
+      console.log(savedRecipesArray);
+      localStorage.setItem("Saved", savedRecipesArray);
     }
-    var favIndex = favoriteRecipes.findIndex(function(favRecipe){
-      return favRecipe.label === recipe.label
-    })
-    //if it isnt in the array add it
-    if(favIndex === -1){
-      favoriteRecipes.push(recipe)
-    } else{
-      favoriteRecipes.splice(favIndex, 1)
-    }
-    //save the fav recipes to local storage
-    localStorage.setItem("favoriteRecipes", JSON.stringify(favoriterecipes))
-  }
+  });
 }
 
 // When the user clicks on the close button of the second modal, close the second modal
