@@ -6,10 +6,10 @@ body {
     background-repeat: no-repeat;
     min-height: 100vh;
     position: relative;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     
 }
 
@@ -147,9 +147,25 @@ body {
     align-items: center; /* Center text vertically */
 }
 
-.has-text-centered {
+/* .has-text-centered {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+} */
+
+.modalTitle {
+    background-color: rgb(209, 148, 107);
+    opacity: 0.6;
+    padding: 10px;
+    padding-right: 20px;
+    border-radius: 4px;
+}
+
+.opacity6 {
+    opacity: 0.6;
+}
+
+.opacity6:hover {
+    opacity: 1;
 }
