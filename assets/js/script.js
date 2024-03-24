@@ -163,8 +163,10 @@ saveChangesBtn.onclick = function () {
 
             // Add button to link to Google Maps
             var mapsLink = document.createElement("button");
+            var googleSearchTitle = recipe.label;
             mapsLink.textContent = "Search Google Maps for restaurants";
-            mapsLink.classList.add("button", "is-fullwidth", "is-success", "is-outlined", "m-2");
+            mapsLink.classList.add("button", "is-fullwidth", "is-success", "is-outlined", "m-2", "mapsBtn");
+            mapsLink.setAttribute("data-title", googleSearchTitle);
 
             // Add button for user to save to favorites
             var saveRecipe = document.createElement("button");
@@ -211,6 +213,18 @@ saveChangesBtn.onclick = function () {
       localStorage.setItem("Saved", savedRecipesArray);
     }
   });
+
+  // Add listener for if user clicks the "google maps" button
+  secondModal.addEventListener("click", function(event) {
+    var element = event.target;
+    if (element.matches(".mapsBtn")) {
+      // Code goes here for whatever we want to happen when the user hits the maps button
+      var mapsSearchTerm = element.dataset.title;
+      var newHTML = "RecipeRoamer/googlemaps/index.html";
+      document.location.pathname = newHTML;
+      document.querySelector("#foodInput").value = mapsSearchTerm;
+    }
+  })
 }
 
 // When the user clicks on the close button of the second modal, close the second modal
