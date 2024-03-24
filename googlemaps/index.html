@@ -5,33 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Food Search</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <style>
+    /* Custom styles */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+    background-color: darkgrey;
+}
+
+#map {
+  position: absolute;
+  top: 20px; /* Adjusted to add padding */
+  left: 20px; /* Adjusted to add padding */
+  right: 20px; /* Adjusted to add padding */
+  bottom: 20px; /* Adjusted to add padding */
+}
+
+#foodSearchBar {
+  position: absolute;
+  top: 50px; /* Adjusted top position */
+  left: 50%; /* Adjusted left position */
+  transform: translateX(-50%); /* Centering horizontally */
+  z-index: 999;
+  border: 2px solid black; /* Adding a black border */
+  border-radius: 10px; /* Making the border rounded */
+  padding: 10px; /* Adding padding inside the border */
+}
+
+    .place-card {
+      margin-bottom: 20px;
+    }
+
+    .place-image {
+      max-height: 200px;
+      object-fit: cover;
+    }
+  </style>
 </head>
 <body>
-  <section class="section">
-    <div class="container">
-      <div class="field has-addons">
-        <div class="control is-expanded">
-          <input id="foodInput" class="input" type="text" placeholder="Type a food...">
-        </div>
-        <div class="control">
-          <button id="searchButton" class="button is-info">Search</button>
-        </div>
-      </div>
-      <div id="map" style="height: 400px;"></div>
-      <div id="placeInfo" style="margin-top: 20px;"></div> <!-- New div for displaying place info -->
+  <div id="map"></div>
+  <div id="foodSearchBar" class="field has-addons">
+    <div class="control is-expanded">
+      <input id="foodInput" class="input" type="text" placeholder="Type a food...">
     </div>
-  </section>
+    <div class="control">
+      <button id="searchButton" class="button is-info">Search</button>
+    </div>
+  </div>
+  <div id="placeInfo"></div>
 
   <script>
+    let activeInfoWindow;
+
     function initMap() {
       const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
+        center: { lat: -34.397, lng: 150.644 }, // Default location (Sydney, Australia)
       });
 
-      const infoWindow = new google.maps.InfoWindow();
-      const service = new google.maps.places.PlacesService(map);
-
-      // Get user's current location
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -40,24 +75,19 @@
               lng: position.coords.longitude
             };
             map.setCenter(userLocation); // Set map center to user's location
-
-            // Add marker for user's location
-            const userMarker = new google.maps.Marker({
-              position: userLocation,
-              map: map,
-              title: "Your Location"
-            });
           },
           () => {
-            // Handle errors (e.g., user denies permission)
             alert("Geolocation failed. Defaulting to a predefined location.");
-            map.setCenter({ lat: -34.397, lng: 150.644 }); // Default location (Sydney, Australia)
+            // Handle errors (e.g., user denies permission)
           }
         );
       } else {
         alert("Geolocation is not supported by this browser. Defaulting to a predefined location.");
-        map.setCenter({ lat: -34.397, lng: 150.644 }); // Default location (Sydney, Australia)
+        // Handle browser doesn't support geolocation
       }
+
+      const infoWindow = new google.maps.InfoWindow();
+      const service = new google.maps.places.PlacesService(map);
 
       document.getElementById("searchButton").addEventListener("click", () => {
         const food = document.getElementById("foodInput").value;
@@ -70,6 +100,7 @@
             },
             (results, status) => {
               if (status === google.maps.places.PlacesServiceStatus.OK) {
+                document.getElementById("placeInfo").innerHTML = ''; // Clear previous results
                 for (let i = 0; i < results.length; i++) {
                   createMarker(results[i]);
                 }
@@ -86,22 +117,41 @@
         });
 
         google.maps.event.addListener(marker, "click", () => {
-          infoWindow.setContent(place.name);
+          if (activeInfoWindow) {
+            activeInfoWindow.close();
+          }
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: `
+              <div class="card place-card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-128x128">
+                        <img class="place-image" src="${place.photos && place.photos.length > 0 ? place.photos[0].getUrl({ maxWidth: 200 }) : ''}" alt="Place Photo">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <p class="title is-4">${place.name}</p>
+                      <p class="subtitle is-6">${place.formatted_address}</p>
+                      <p>Rating: ${place.rating}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `,
+          });
           infoWindow.open(map, marker);
-          
-          // Display place information below the map
-          document.getElementById("placeInfo").innerHTML = `
-            <h2>${place.name}</h2>
-            <p>${place.formatted_address}</p>
-            <p>Rating: ${place.rating}</p>
-          `;
+          activeInfoWindow = infoWindow;
         });
       }
     }
   </script>
 
+
+
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBryCPsaJpGtXs2o5KCy8djJ0lChRPQra0&libraries=places&callback=initMap"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBryCPsaJpGtXs2o5KCy8djJ0lChRPQra0&libraries=places&callback=initMap"
     async
     defer
   ></script>
