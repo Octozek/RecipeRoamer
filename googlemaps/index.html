@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <style>
     /* Custom styles */
+    body {
+      background-color: #f0f0f0; /* Set a light gray background */
+    }
+
     .map-container {
       height: 400px; /* Adjust height as needed */
     }
@@ -38,26 +42,29 @@
   <!-- Modal -->
   <div id="mapModal" class="modal">
     <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Food Search</p>
-        <button class="delete" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
-        <div class="map-container">
-          <div id="map"></div>
-        </div>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <input id="foodInput" class="input" type="text" placeholder="Type a food...">
+    <div class="modal-content">
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Food Search</p>
+          <button id="modalCloseButton" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="map-container">
+            <div id="map"></div>
           </div>
-          <div class="control">
-            <button id="searchButton" class="button is-info">Search</button>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input id="foodInput" class="input" type="text" placeholder="Type a food...">
+            </div>
+            <div class="control">
+              <button id="searchButton" class="button is-info">Search</button>
+            </div>
           </div>
-        </div>
-        <div id="placeInfo"></div>
-      </section>
+          <div id="placeInfo"></div>
+        </section>
+      </div>
     </div>
+    <button class="modal-close is-large" aria-label="close"></button> <!-- This is the Bulma close button, you can remove it -->
   </div>
 
   <script>
@@ -66,17 +73,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       const modalTrigger = document.getElementById('modalTrigger');
       const mapModal = document.getElementById('mapModal');
+      const modalCloseButton = document.getElementById('modalCloseButton');
 
       modalTrigger.addEventListener('click', () => {
         mapModal.classList.add('is-active');
         initMap();
       });
 
-      const closeButtons = document.querySelectorAll('.delete');
-      closeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          mapModal.classList.remove('is-active');
-        });
+      modalCloseButton.addEventListener('click', () => {
+        mapModal.classList.remove('is-active');
       });
     });
 
@@ -166,6 +171,10 @@
       }
     }
   </script>
+
+
+
+
 
 
 

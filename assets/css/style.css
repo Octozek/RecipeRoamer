@@ -169,3 +169,27 @@ body {
 .opacity6:hover {
     opacity: 1;
 }
+
+
+  .map-container {
+    height: 400px; /* Adjust height as needed */
+  }
+
+  #map {
+    height: 100%;
+  }
+
+  .place-card {
+    margin-bottom: 20px;
+  }
+
+  .place-image {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  /* Adjust modal size */
+  .map-modal-content {
+    max-height: calc(100vh - 40px); /* 40px accounts for modal header and padding */
+    overflow-y: auto; /* Allow vertical scrolling if content exceeds modal height */
+  }

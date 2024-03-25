@@ -161,13 +161,19 @@ saveChangesBtn.onclick = function () {
             recipeLink.classList.add("button", "is-fullwidth", "is-link", "is-outlined", "m-2");
             recipeLink.setAttribute("href", recipe.url);
 
-            // Add button to link to Google Maps
-            var mapsLink = document.createElement("button");
-            var googleSearchTitle = recipe.label;
-            mapsLink.textContent = "Search Google Maps for restaurants";
-            mapsLink.classList.add("button", "is-fullwidth", "is-success", "is-outlined", "m-2", "mapsBtn");
-            mapsLink.setAttribute("data-title", googleSearchTitle);
+  // Create an anchor tag instead of a button
+var mapsLink = document.createElement("a");
+mapsLink.textContent = "Search Google Maps for restaurants";
+mapsLink.classList.add("button", "is-fullwidth", "is-success", "is-outlined", "m-2");
+mapsLink.href = "#"; // Set href to "#" to prevent redirection
 
+// Add event listener to open map modal
+mapsLink.addEventListener('click', () => {
+  const mapModal = document.getElementById('mapModal');
+  mapModal.classList.add('is-active');
+  initMap(); // Initialize the map when the modal is opened
+});
+      
             // Add button for user to save to favorites
             var saveRecipe = document.createElement("button");
             var dataURL = recipe.url;
@@ -213,18 +219,6 @@ saveChangesBtn.onclick = function () {
       localStorage.setItem("Saved", savedRecipesArray);
     }
   });
-
-  // Add listener for if user clicks the "google maps" button
-  secondModal.addEventListener("click", function(event) {
-    var element = event.target;
-    if (element.matches(".mapsBtn")) {
-      // Code goes here for whatever we want to happen when the user hits the maps button
-      var mapsSearchTerm = element.dataset.title;
-      var newHTML = "RecipeRoamer/googlemaps/index.html";
-      document.location.pathname = newHTML;
-      document.querySelector("#foodInput").value = mapsSearchTerm;
-    }
-  })
 }
 
 // When the user clicks on the close button of the second modal, close the second modal
@@ -237,5 +231,115 @@ document.querySelector("#secondModal .delete").onclick = function () {
 
 
 
+let activeInfoWindow;
 
+document.addEventListener('DOMContentLoaded', () => {
+  const modalTrigger = document.getElementById('modalTrigger');
+  const mapModal = document.getElementById('mapModal');
+  const modalCloseButton = document.getElementById('modalCloseButton');
+
+  modalTrigger.addEventListener('click', () => {
+    mapModal.classList.add('is-active');
+    initMap();
+  });
+
+  modalCloseButton.addEventListener('click', () => {
+    console.log('Close button clicked');
+    mapModal.classList.remove('is-active');
+  });
+
+  const mapModalCloseButton = document.getElementById('mapModalCloseButton');
+  mapModalCloseButton.addEventListener('click', () => {
+    mapModal.classList.remove('is-active');
+  });
+});
+
+
+
+
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: { lat: -34.397, lng: 150.644 }, // Default location (Sydney, Australia)
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        map.setCenter(userLocation); // Set map center to user's location
+      },
+      () => {
+        alert("Geolocation failed. Defaulting to a predefined location.");
+        // Handle errors (e.g., user denies permission)
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by this browser. Defaulting to a predefined location.");
+    // Handle browser doesn't support geolocation
+  }
+
+  const infoWindow = new google.maps.InfoWindow();
+  const service = new google.maps.places.PlacesService(map);
+
+  document.getElementById("searchButton").addEventListener("click", () => {
+    const food = document.getElementById("foodInput").value;
+    if (food) {
+      service.textSearch(
+        {
+          query: food + " food",
+          location: map.getCenter(),
+          radius: 5000,
+        },
+        (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            document.getElementById("placeInfo").innerHTML = ''; // Clear previous results
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+          }
+        }
+      );
+    }
+  });
+
+  function createMarker(place) {
+    const marker = new google.maps.Marker({
+      map,
+      position: place.geometry.location,
+    });
+
+    google.maps.event.addListener(marker, "click", () => {
+      if (activeInfoWindow) {
+        activeInfoWindow.close();
+      }
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: `
+          <div class="card place-card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-128x128">
+                    <img class="place-image" src="${place.photos && place.photos.length > 0 ? place.photos[0].getUrl({ maxWidth: 200 }) : ''}" alt="Place Photo">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">${place.name}</p>
+                  <p class="subtitle is-6">${place.formatted_address}</p>
+                  <p>Rating: ${place.rating}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+      });
+      infoWindow.open(map, marker);
+      activeInfoWindow = infoWindow;
+    });
+  }
+}
 
