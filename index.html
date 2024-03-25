@@ -171,6 +171,40 @@
         </div>
       </div>
 
+ <!-- Modal for googlemaps search -->
+
+ <button id="mapModalCloseButton" class="modal-close is-large" aria-label="close"></button>
+
+ <div id="mapModal" class="modal">
+  <div class="modal-background"></div>
+  <div class="map-modal-content">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Food Search</p>
+        <button id="modalCloseButton" class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="map-container">
+          <div id="map"></div>
+        </div>
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <input id="foodInput" class="input" type="text" placeholder="Type a food...">
+          </div>
+          <div class="control">
+            <button id="searchButton" class="button is-info">Search</button>
+          </div>
+        </div>
+        <div id="placeInfo"></div>
+      </section>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button> <!-- This is the Bulma close button, you can remove it -->
+</div>
+
+
+
+
       <!-- Content section -->
       <section class="section">
         <div class="container">
@@ -207,6 +241,15 @@
         </p>
       </div>
     </footer>
+
+
+ <script
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBryCPsaJpGtXs2o5KCy8djJ0lChRPQra0&libraries=places&callback=initMap"
+   async
+   defer
+ ></script>
+
+
 
     <script src="./assets/js/script.js"></script>
 </body>

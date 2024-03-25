@@ -7,34 +7,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <style>
     /* Custom styles */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
+    body {
+      background-color: #f0f0f0; /* Set a light gray background */
     }
 
-    body {
-    background-color: darkgrey;
-}
+    .map-container {
+      height: 400px; /* Adjust height as needed */
+    }
 
-#map {
-  position: absolute;
-  top: 20px; /* Adjusted to add padding */
-  left: 20px; /* Adjusted to add padding */
-  right: 20px; /* Adjusted to add padding */
-  bottom: 20px; /* Adjusted to add padding */
-}
-
-#foodSearchBar {
-  position: absolute;
-  top: 50px; /* Adjusted top position */
-  left: 50%; /* Adjusted left position */
-  transform: translateX(-50%); /* Centering horizontally */
-  z-index: 999;
-  border: 2px solid black; /* Adding a black border */
-  border-radius: 10px; /* Making the border rounded */
-  padding: 10px; /* Adding padding inside the border */
-}
+    #map {
+      height: 100%;
+    }
 
     .place-card {
       margin-bottom: 20px;
@@ -44,22 +27,63 @@
       max-height: 200px;
       object-fit: cover;
     }
+
+    /* Adjust modal size */
+    .modal-content {
+      max-height: calc(100vh - 40px); /* 40px accounts for modal header and padding */
+      overflow-y: auto; /* Allow vertical scrolling if content exceeds modal height */
+    }
   </style>
 </head>
 <body>
-  <div id="map"></div>
-  <div id="foodSearchBar" class="field has-addons">
-    <div class="control is-expanded">
-      <input id="foodInput" class="input" type="text" placeholder="Type a food...">
+  <!-- Modal Trigger -->
+  <button id="modalTrigger" class="button is-info">Open Map</button>
+
+  <!-- Modal -->
+  <div id="mapModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Food Search</p>
+          <button id="modalCloseButton" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="map-container">
+            <div id="map"></div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input id="foodInput" class="input" type="text" placeholder="Type a food...">
+            </div>
+            <div class="control">
+              <button id="searchButton" class="button is-info">Search</button>
+            </div>
+          </div>
+          <div id="placeInfo"></div>
+        </section>
+      </div>
     </div>
-    <div class="control">
-      <button id="searchButton" class="button is-info">Search</button>
-    </div>
+    <button class="modal-close is-large" aria-label="close"></button> <!-- This is the Bulma close button, you can remove it -->
   </div>
-  <div id="placeInfo"></div>
 
   <script>
     let activeInfoWindow;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const modalTrigger = document.getElementById('modalTrigger');
+      const mapModal = document.getElementById('mapModal');
+      const modalCloseButton = document.getElementById('modalCloseButton');
+
+      modalTrigger.addEventListener('click', () => {
+        mapModal.classList.add('is-active');
+        initMap();
+      });
+
+      modalCloseButton.addEventListener('click', () => {
+        mapModal.classList.remove('is-active');
+      });
+    });
 
     function initMap() {
       const map = new google.maps.Map(document.getElementById("map"), {
@@ -147,6 +171,11 @@
       }
     }
   </script>
+
+
+
+
+
 
 
 
