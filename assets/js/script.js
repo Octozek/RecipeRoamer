@@ -233,27 +233,20 @@ document.querySelector("#secondModal .delete").onclick = function () {
 
 let activeInfoWindow;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modalTrigger = document.getElementById('modalTrigger');
-  const mapModal = document.getElementById('mapModal');
-  const modalCloseButton = document.getElementById('modalCloseButton');
-
-  modalTrigger.addEventListener('click', () => {
-    mapModal.classList.add('is-active');
-    initMap();
-  });
-
-  modalCloseButton.addEventListener('click', () => {
-    console.log('Close button clicked');
-    mapModal.classList.remove('is-active');
-  });
-
-  const mapModalCloseButton = document.getElementById('mapModalCloseButton');
-  mapModalCloseButton.addEventListener('click', () => {
-    mapModal.classList.remove('is-active');
-  });
+document.addEventListener('DOMContentLoaded', function() {
+  // Your JavaScript code here
+  var mapModalCloseButton = document.getElementById('mapModalCloseButton');
+  // Attach event listener
+  if (mapModalCloseButton) {
+      mapModalCloseButton.addEventListener('click', function() {
+          // Your event handler code here
+      });
+  }
 });
 
+document.querySelector("#mapModal .delete").addEventListener('click', function () {
+  mapModal.classList.remove('is-active');
+});
 
 
 
