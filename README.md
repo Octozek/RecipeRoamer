@@ -16,7 +16,7 @@ N/A
 
 ## Usage
 
-To use this applcation, please visit [insert link here].
+To use this applcation, please visit [this link](https://octozek.github.io/RecipeRoamer/).
 
 Users will be greeted by the landing page of the application; a simple site with a nav bar, and a "Search" button on the middle left-hand side of the page.
 
