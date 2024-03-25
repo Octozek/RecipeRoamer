@@ -45,7 +45,7 @@ openFavsBtn.addEventListener("click", function () {
 
       // add functionality to remove favorites
       var removeFavButton = document.getElementById("removeFavs");
-      removeFavButton.addEventListener("click", function() {
+      removeFavButton.addEventListener("click", function () {
         savedRecipesArray = [];
         renderFavoritesHere.innerHTML = "";
         localStorage.setItem("Saved", savedRecipesArray)
@@ -161,19 +161,19 @@ saveChangesBtn.onclick = function () {
             recipeLink.classList.add("button", "is-fullwidth", "is-link", "is-outlined", "m-2");
             recipeLink.setAttribute("href", recipe.url);
 
-  // Create an anchor tag instead of a button
-var mapsLink = document.createElement("a");
-mapsLink.textContent = "Search Google Maps for restaurants";
-mapsLink.classList.add("button", "is-fullwidth", "is-success", "is-outlined", "m-2");
-mapsLink.href = "#"; // Set href to "#" to prevent redirection
+            // Create an anchor tag instead of a button
+            var mapsLink = document.createElement("a");
+            mapsLink.textContent = "Search Google Maps for restaurants";
+            mapsLink.classList.add("button", "is-fullwidth", "is-success", "is-outlined", "m-2");
+            mapsLink.href = "#"; // Set href to "#" to prevent redirection
 
-// Add event listener to open map modal
-mapsLink.addEventListener('click', () => {
-  const mapModal = document.getElementById('mapModal');
-  mapModal.classList.add('is-active');
-  initMap(); // Initialize the map when the modal is opened
-});
-      
+            // Add event listener to open map modal
+            mapsLink.addEventListener('click', () => {
+              const mapModal = document.getElementById('mapModal');
+              mapModal.classList.add('is-active');
+              initMap(); // Initialize the map when the modal is opened
+            });
+
             // Add button for user to save to favorites
             var saveRecipe = document.createElement("button");
             var dataURL = recipe.url;
@@ -233,14 +233,14 @@ document.querySelector("#secondModal .delete").onclick = function () {
 
 let activeInfoWindow;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Your JavaScript code here
   var mapModalCloseButton = document.getElementById('mapModalCloseButton');
   // Attach event listener
   if (mapModalCloseButton) {
-      mapModalCloseButton.addEventListener('click', function() {
-          // Your event handler code here
-      });
+    mapModalCloseButton.addEventListener('click', function () {
+      // Your event handler code here
+    });
   }
 });
 
